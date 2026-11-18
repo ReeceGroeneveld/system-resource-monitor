@@ -35,15 +35,15 @@ def pause():
 
 def view_current_status():
     """
-     Menu option 1: show the current status of any warning.
+     Menu option 1: show the current status and any warnings.
     """
 
-    print("\nGAthering system information...")
+    print("\nGathering system information...")
 
     summary = monitor.get_resource_summary()
-    monitor.display_resource_summary()
+    monitor.display_resource_summary(summary)
     print()
-    monitor.display_warnings()
+    monitor.display_warnings(summary)
 
 def save_current_snapshot():
     """
@@ -67,11 +67,10 @@ def main():
     """
     while True:
         print_menu()
-        choice = input("Choose an option (1-6):  ").strip()
+        choice = input("Choose an option (1-6):  ").strip()        
         if choice == "1":
             view_current_status()
             pause()
-
         elif choice == "2":
             monitor.start_live_monitor()
             pause()
