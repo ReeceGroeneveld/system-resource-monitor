@@ -23,6 +23,9 @@ THRESHOLDS = {
     "memory": 80,
     "disk": 90,
 }
+
+REFRESH_SECONDS = 2
+
 #-------------------------------------------------------------------------
 # Part 4: System information
 #-------------------------------------------------------------------------
@@ -218,5 +221,49 @@ def display_warnings(summary):
         for warning in warnings:
             print(warning)
 
+#------------------------------------------------------------------------
+# Part 8: Live monitor
+#------------------------------------------------------------------------
 
+def clear_screen():
+    """
+    Clear the terminal window>
+    """
+    if os.name == "nt":
+        os.system("cls")
+    else:
+        os.system("clear")
 
+def display_live_screen(summary):
+    """
+    Print one "frame" of the live monitor.
+    """
+    statuses = get_statuses(summary)
+
+    print("="*30)
+    print()
+    print(f"CPU Usage:   {summary['cpu_percent']}%")
+    print(f"Memory Usage: {summary['memory_percent']}%")
+    print(f"Disk Usage:   {summary['disk_percent']}%")
+    print()
+    print("Status:")
+    print(f"CPU:    {statuses['cpu']}")
+    print(f"Memory: {statuses['memory']}")
+    print(f"Disk:   {statuses['disk']}")
+    print()
+    print("Press Ctrl+C to stop monitoring.")
+
+def start_live_monitor():
+    """
+    Keep refreshing the screen until the user presses Ctrl+C.
+    """
+    try:
+        while True:
+            summary = get_resource_summary()
+            clear_screen()
+            display_live_screen(summary)
+            time.sleep(REFRESH_SECONDS)
+    except KeyboardInterrupt:
+        print()
+        print("Live monitor stopped. Returning to the menu...")
+    
