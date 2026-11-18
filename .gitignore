@@ -5,3 +5,5 @@ scratch.py
 .venv/
 venv/
 logs/*.csv
+.DS_Store
+Thumbs.db
