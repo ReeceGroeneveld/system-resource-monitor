@@ -23,7 +23,7 @@ def print_menu():
     print("2. Start Live Monitor")
     print("3. View Top Processes")
     print("4. Save Current Snapshot")
-    print("5.View System Information")
+    print("5. View System Information")
     print("6. Exit")
     print("=" * 32)
 
